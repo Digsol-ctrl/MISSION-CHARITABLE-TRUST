@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Assistant Training Program - Mission Charitable Trust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Color Variables - Blue theme */
+        :root {
+            --primary: #1A73B8; /* Primary blue */
+            --secondary: #2A7A3E; /* Green as secondary */
+            --accent1: #E41B23; /* Red for accents */
+            --accent2: #F8D41F; /* Yellow for highlights */
+            --dark: #222222; /* Almost black for text */
+            --light: #f8f9fa; /* Light background */
+            --mid: #e9ecef; /* Mid tone for sections */
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--accent1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #145a93;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent1);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0161d;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #236b35;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent1);
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('NURSES IN BLUE.JPG');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        /* Program Overview */
+        .program-overview {
+            background-color: var(--light);
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .overview-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .overview-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Modules Section */
+        .modules {
+            background-color: var(--mid);
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .module-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .module-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-card i {
+            margin-right: 10px;
+            color: var(--accent1);
+        }
+        
+        /* Requirements Section */
+        .requirements {
+            background-color: var(--light);
+        }
+        
+        .requirements-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .requirements-list {
+            margin-top: 20px;
+        }
+        
+        .requirements-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .requirements-list i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Why Choose Us */
+        .why-choose {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .reason-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .reason-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Impact Section */
+        .impact {
+            background-color: var(--mid);
+            text-align: center;
+        }
+        
+        .impact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .impact-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .impact-stat {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-width: 150px;
+        }
+        
+        .impact-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(26, 115, 184, 0.9), rgba(26, 115, 184, 0.9)), url('https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent2);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent2);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .requirements-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .impact-stats {
+                flex-wrap: wrap;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container container">
+            <a href="index.html"
+            style="text-decoration: none;"
+            >
+            <div class="logo">
+                <img src="Mission Charitable Trust Logo.jpg" alt="Mission Charitable Trust Logo">
+                <h1
+                style="color: black;
+                line-height: normal;
+                font-size: 16px;"
+                >Mission Charitable Trust</h1>
+            </div>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="#training" class="active">Training</a></li>
+                <li><a href="index.html#impact">Impact</a></li>
+                <li><a href="index.html#donate" class="btn btn-accent">Donate</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="training">
+        <div class="hero-content">
+            <h2>Start Your Rewarding Career in Healthcare</h2>
+            <p>Every journey begins with a single step. Our Nursing Assistant Training Program is your opportunity to transform your future and serve your community with compassion and skill.</p>
+            <a href="#cta" class="btn btn-secondary">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section class="section program-overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Program Overview</h2>
+                <p>Comprehensive 7-month training program to prepare you for a fulfilling career in healthcare</p>
+            </div>
+            
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Duration</h3>
+                    <p>7 months of intensive training</p>
+                </div>
+                
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Venues</h3>
+                    <p>Zaka ZCC Zivavose Center<br>&<br>Tavidaale/Belford Center</p>
+                </div>
+                
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Certificate</h3>
+                    <p>Certificate in Nursing Assistance</p>
+                </div>
+                
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Commencement</h3>
+                    <p>08 September 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="section modules">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Modules</h2>
+                <p>Comprehensive curriculum designed to provide you with essential healthcare knowledge and skills</p>
+            </div>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h3><i class="fas fa-lungs"></i> Anatomy & Physiology</h3>
+                    <p>Understand the human body structure and functions to provide better patient care.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-stethoscope"></i> System Disorders & Management</h3>
+                    <p>Learn to identify and manage various system disorders in clinical settings.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-pills"></i> Basic Pharmacology</h3>
+                    <p>Gain knowledge of medications, their effects, and safe administration practices.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-hand-holding-medical"></i> Clinical Nursing Skills</h3>
+                    <p>Develop hands-on skills for patient care in various healthcare settings.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-first-aid"></i> First Aid</h3>
+                    <p>Learn emergency response techniques to provide immediate care when needed.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-hospital-user"></i> 3 Months Hospital Secondments</h3>
+                    <p>Gain practical experience through hospital placements and real-world training.</p>
+                </div>
+                
+                <div class="module-card">
+                    <h3><i class="fas fa-ban"></i> Drug Abuse Campaign</h3>
+                    <p>Participate in awareness and prevention initiatives to combat substance abuse in communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="section requirements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entry Requirements</h2>
+                <p>What you need to join our Nursing Assistant Training Program</p>
+            </div>
+            
+            <div class="requirements-content">
+                <div>
+                    <h3>Eligibility Criteria</h3>
+                    <ul class="requirements-list">
+                        <li><i class="fas fa-check-circle"></i> Minimum of 3 O'Level passes</li>
+                        <li><i class="fas fa-check-circle"></i> 18 years of age or above</li>
+                        <li><i class="fas fa-check-circle"></i> Passion for helping others</li>
+                        <li><i class="fas fa-check-circle"></i> Commitment to complete the 7-month program</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 30px;">What to Bring</h3>
+                    <ul class="requirements-list">
+                        <li><i class="fas fa-bed"></i> Beddings</li>
+                        <li><i class="fas fa-soap"></i> Toiletries</li>
+                        <li><i class="fas fa-utensils"></i> Food provisions</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px; font-weight: 600; color: var(--primary);">
+                        <i class="fas fa-home"></i> Accommodation is freely available at both training centers.
+                    </p>
+                </div>
+                
+                <div>
+                    <img src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nursing students learning" style="border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Our Program?</h2>
+                <p>Join a program that transforms lives and communities</p>
+            </div>
+            
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Empowerment Through Education</h3>
+                    <p>We're committed to empowering youth through quality education and practical training.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-briefcase-medical"></i>
+                    </div>
+                    <h3>Career Preparation</h3>
+                    <p>We prepare candidates for fulfilling future careers in healthcare with market-relevant skills.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Community Service</h3>
+                    <p>Our graduates serve communities with hope, care, and compassion where it's needed most.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Partnership Support</h3>
+                    <p>Supported by Rutendo Medical Center in partnership for enhanced learning opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="section impact">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Ripple Effect of Your Training</h2>
+                <p
+                style="font-size: 18px;"
+                >One trained nursing assistant can touch countless lives in their community</p>
+            </div>
+            
+            <div class="impact-content">
+                <p>When you become a certified nursing assistant, you don't just transform your own future—you become a catalyst for positive change in your community. Your skills and compassion will create a ripple effect, improving healthcare outcomes and inspiring others to pursue careers in healthcare.</p>
+                
+                <div class="impact-stats">
+                    <div class="impact-stat">
+                        <div class="impact-number">250+</div>
+                        <div class="impact-desc">Lives touched per graduate annually</div>
+                    </div>
+                    
+                    <div class="impact-stat">
+                        <div class="impact-number">85%</div>
+                        <div class="impact-desc">Employment rate within 6 months</div>
+                    </div>
+                    
+                    <div class="impact-stat">
+                        <div class="impact-number">7</div>
+                        <div class="impact-desc">Communities served per graduate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2>Take the First Step Towards a Fulfilling Career in Healthcare!</h2>
+            <p>Your journey to making a difference in people's lives starts here. Join our September 2025 intake and become part of the solution to healthcare challenges in our communities.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://wa.me/263774971982" class="btn btn-accent">Register Now via WhatsApp</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us for Information</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Nursing Assistant Training Program</h3>
+                    <p>A initiative by Mission Charitable Trust to empower youth and improve healthcare in underserved communities.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Training Centers</h3>
+                    <ul>
+                        <li>Zaka ZCC Zivavose Center</li>
+                        <li>Tavidaale/Belford Center</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-weight: 600;">Commencement: 08 September 2025</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <ul class="contact-info">
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp: 0774 971 982</li>
+                        <li><i class="fas fa-phone"></i> Call: 0716 964 205</li>
+                        <li><i class="fas fa-envelope"></i> Email: training@missiontrust.org</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#programs">Our Programs</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#donate">Support Our Work</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Mission Charitable Trust. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

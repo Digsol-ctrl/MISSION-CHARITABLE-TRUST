@@ -8,10 +8,10 @@
     <style>
         /* Color Variables */
         :root {
-            --primary: #2A7A3E; /* Deep green - primary color */
-            --secondary: #1A73B8; /* Trust blue - secondary color */
-            --accent1: #E41B23; /* Red - for important elements */
-            --accent2: #F8D41F; /* Yellow - for highlights */
+            --primary: #1A73B8; /* Primary blue */
+            --secondary: #2A7A3E; /* Green as secondary */
+            --accent1: #E41B23; /* Red for accents */
+            --accent2: #F8D41F; /* Yellow for highlights */
             --dark: #222222; /* Almost black for text */
             --light: #f8f9fa; /* Light background */
             --mid: #e9ecef; /* Mid tone for sections */
@@ -65,6 +65,7 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            margin-top: 30px;
         }
         
         .btn:hover {
@@ -187,7 +188,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('MUDAVANHU & nURSES.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -254,6 +255,24 @@
             color: var(--primary);
             margin-bottom: 20px;
         }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+            
+        }
+
         
         /* About Section */
         .about {
@@ -590,9 +609,11 @@
     <header>
         <div class="header-container container">
             <div class="logo">
-                <img src="mctlogo.jpg" alt="Mission Charitable Trust Logo">
+                <img src="Mission Charitable Trust Logo.jpg" alt="Mission Charitable Trust Logo">
                 <h1
-                style="color: black;"
+                style="color: black;
+                line-height: normal;
+                font-size: 16px;"
                 >Mission Charitable Trust</h1>
             </div>
             
@@ -605,7 +626,7 @@
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#values">Values</a></li>
                 <li><a href="#programs">Programs</a></li>
-                <li><a href="#training">Training</a></li>
+                <li><a href="Nursing Training.html">Training</a></li>
                 <li><a href="#impact">Impact</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -618,8 +639,8 @@
             <h2>Uplifting Lives and Promoting Sound Health in Rural Communities</h2>
             <p>A registered, wholly Zimbabwean-owned trust improving healthcare access through mobile clinics and nursing assistant training since 2019.</p>
             <div class="hero-buttons">
-                <a href="#donate" class="btn btn-accent">Enroll For A Course</a>
-                <a href="#volunteer" class="btn">Volunteer</a>
+                <a href="Nursing Training.html" class="btn btn-accent pulse">Nursing Assistance Training</a>
+                <a href="#volunteer" class="btn">Our Services</a>
             </div>
         </div>
     </section>
@@ -760,7 +781,7 @@
                 </div>
                 
                 <div class="program-card">
-                    <div class="program-img" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="program-img" style="background-image: url('MISSION\ CHARITABLE\ TRUST\ OUTREACH.jpg');"></div>
                     <div class="program-content">
                         <h3>Health Screenings</h3>
                         <p>We offer free screenings for HIV/AIDS, diabetes, hypertension, and other chronic diseases, enabling early detection and treatment.</p>
@@ -769,7 +790,7 @@
                 </div>
                 
                 <div class="program-card">
-                    <div class="program-img" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="program-img" style="background-image: url('MISSION\ CHARITABLE\ TRUST\ TEAM.jpg');"></div>
                     <div class="program-content">
                         <h3>Health Education</h3>
                         <p>Our community health education programs empower individuals with knowledge to make informed decisions about their health and wellbeing.</p>
@@ -778,7 +799,7 @@
                 </div>
 
                 <div class="program-card">
-                    <div class="program-img" style="background-image: url('https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="program-img" style="background-image: url('GLiADQSWgAAYVKC.jpg');"></div>
                     <div class="program-content">
                         <h3>Drug Abuse Prevention</h3>
                         <p>Comprehensive programs to combat substance abuse through education, counseling, and community support initiatives.</p>
@@ -807,14 +828,14 @@
                     <p>To date, we have trained over 250 nursing assistants, with 85% securing employment in healthcare facilities within six months of graduation.</p>
                     
                     <div class="training-highlights">
-                        <li><i class="fas fa-check-circle"></i> 7-month comprehensive program</li>
-                        <li><i class="fas fa-check-circle"></i> Classroom and clinical training</li>
-                        <li><i class="fas fa-check-circle"></i> Certification upon completion</li>
-                        <li><i class="fas fa-check-circle"></i> Job placement assistance</li>
-                        <li><i class="fas fa-check-circle"></i> Focus on rural healthcare needs</li>
+                        <li><i class="fas fa-calendar-check"></i> 7-month comprehensive program</li>
+                        <li><i class="fas fa-briefcase-medical"></i> Classroom and clinical training</li>
+                        <li><i class="fas fa-certificate"></i> Certification upon completion</li>
+                        <li><i class="fas fa-briefcase"></i> Job placement assistance</li>
+                        <li><i class="fas fa-hand-holding-medical"></i> Focus on rural healthcare needs</li>
                     </div>
                     
-                    <a href="#" class="btn">Learn About Our Curriculum</a>
+                    <a href="Nursing Training.html" class="btn">Learn About Our Training</a>
                 </div>
                 
                 <div>
@@ -825,12 +846,21 @@
     </section>
 
     <div class="featuredSection">
+
+        
+        <div class="section-title">
+            <h2>Featured Images</h2><br>
+            <p>Meet Our Team, Trainers & Traineers At Various
+            Training Centers Across Zimbabwe.
+        </p>
+        </div>
+
       <div class="featuredContainer">
-        <div class="featuredImageCont" ><img src="nURSES IN CLASS.jpg" alt=""></div>
-        <div class="featuredImageCont" ><img src="MISSION CHARITABLE TRUST TEAM.jpg" alt=""></div>
-        <div class="featuredImageCont" ><img src="NURSES IN BLUE.jpg" alt=""></div>
+        <div class="featuredImageCont" ><img src="Mission Charitable Trust IN WEDZA.jpg" alt=""></div>
+        <div class="featuredImageCont" ><img src="Gokwe.jpg" alt=""></div>
+        <div class="featuredImageCont" ><img src="FB_IMG_1755782640063.jpg" alt=""></div>
         <div class="featuredImageCont" ><img src="MISSION CHARITABLE TRUST.jpg" alt=""></div>
-        <div class="featuredImageCont" ><img src="NURSES WITH CERTS.jpg" alt=""></div>
+        <div class="featuredImageCont" ><img src="nURSES IN CLASS.jpg" alt=""></div>
         <div class="featuredImageCont" ><img src="NURSES WITH CERTS.jpg" alt=""></div>
       </div>
     </div>
@@ -940,7 +970,7 @@
         <div class="container">
             <h2>Join Us in Making a Difference</h2>
             <p>Your support enables us to continue providing essential healthcare services and training to underserved communities across Zimbabwe.</p>
-            <a href="#" class="btn btn-accent">Enroll A Course</a>
+            <a href="Nursing Training.html" class="btn btn-primary">Nursing Training</a>
         </div>
     </section>
 
@@ -993,7 +1023,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Mission Charitable Trust (Registered Trust). All rights reserved.</p>
+                <p>&copy; 2025 Mission Charitable Trust (Registered Trust). All rights reserved.</p>
             </div>
         </div>
     </footer>
