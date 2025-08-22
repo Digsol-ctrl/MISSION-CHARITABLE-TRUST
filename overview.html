@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Mission Charitable Trust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Color Variables */
+        :root {
+            --primary: #1A73B8; /* Primary blue */
+            --secondary: #2A7A3E; /* Green as secondary */
+            --accent1: #E41B23; /* Red for accents */
+            --accent2: #F8D41F; /* Yellow for highlights */
+            --dark: #222222; /* Almost black for text */
+            --light: #f8f9fa; /* Light background */
+            --mid: #e9ecef; /* Mid tone for sections */
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--accent1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #145a93;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent1);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0161d;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent1);
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(MISSION\ CHARITABLE\ TRUST\ TEAM.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        /* Overview Section */
+        .overview {
+            background-color: var(--light);
+        }
+        
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .overview-text h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .overview-highlights {
+            margin-top: 30px;
+        }
+        
+        .overview-highlights li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .overview-highlights i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Map Section */
+        .map-section {
+            background-color: var(--mid);
+            padding: 60px 0;
+        }
+        
+        #zimbabwe-map {
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        /* Provinces Section */
+        .provinces {
+            background-color: var(--light);
+        }
+        
+        .provinces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .province-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .province-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .province-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .province-content {
+            padding: 20px;
+        }
+        
+        .province-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Expansion Section */
+        .expansion {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .expansion-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .expansion-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 40px;
+            text-align: left;
+        }
+        
+        .expansion-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .expansion-card i {
+            margin-right: 10px;
+            color: var(--accent1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent2);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent2);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            #zimbabwe-map {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container container">
+            <div class="logo">
+                <img src="Mission Charitable Trust Logo.jpg" alt="Mission Charitable Trust Logo">
+                <h1
+                style="color: black;
+                line-height: normal;
+                font-size: 16px;"
+                >Mission Charitable Trust</h1>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview" class="active">Overview</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="index.html#impact">Impact</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#donate" class="btn btn-accent">Donate</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-content">
+            <h2>Serving Communities Across Zimbabwe</h2>
+            <p>Since 2019, Mission Charitable Trust has been dedicated to improving healthcare access in underserved communities throughout Zimbabwe</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="section overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Overview of Mission Charitable Trust</h2>
+                <p>Our journey from a local initiative to a nationwide impact</p>
+            </div>
+            
+            <div class="overview-content">
+                <div class="overview-text">
+                    <h3>Our Foundation</h3>
+                    <p>Mission Charitable Trust was founded in 2019 in Nyabira under Zvimba District in Mashonaland West Province. The Trust is headquartered in Nyabira, from where we coordinate our nationwide operations.</p>
+                    
+                    <p>What began as a local initiative to address healthcare disparities has grown into a comprehensive organization serving thousands annually across multiple provinces.</p>
+                    
+                    <div class="overview-highlights">
+                        <li><i class="fas fa-map-marker-alt"></i> <strong>Headquarters:</strong> Nyabira, Zvimba District</li>
+                        <li><i class="fas fa-calendar-alt"></i> <strong>Founded:</strong> 2019</li>
+                        <li><i class="fas fa-provinces"></i> <strong>Provinces Served:</strong> 6 provinces across Zimbabwe</li>
+                        <li><i class="fas fa-users"></i> <strong>Communities Impacted:</strong> 45+ and growing</li>
+                    </div>
+                </div>
+                
+                <div>
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Healthcare outreach" style="border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Operational Areas</h2>
+                <p>Currently serving 6 provinces with plans to expand to Matabeleland North</p>
+            </div>
+            
+            <div id="zimbabwe-map"></div>
+            
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #1A73B8;"></div>
+                    <span>Current Operations</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #E41B23;"></div>
+                    <span>Expansion Plans (Binga District)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Provinces Section -->
+    <section class="section provinces">
+        <div class="container">
+            <div class="section-title">
+                <h2>Provinces We Serve</h2>
+                <p>Since its inception, Mission Charitable Trust has been operating in 6 provinces across Zimbabwe</p>
+            </div>
+            
+            <div class="provinces-grid">
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url(wedza.jpg);"></div>
+                    <div class="province-content">
+                        <h3>Mashonaland East</h3>
+                        <p><strong>District:</strong> Wedza District</p>
+                        <p>Our programs in Wedza District focus on mobile clinics and health education, serving remote communities with limited healthcare access.</p>
+                    </div>
+                </div>
+                
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url(NURSES\ WITH\ CERTS.jpg);"></div>
+                    <div class="province-content">
+                        <h3>Mashonaland West</h3>
+                        <p><strong>District:</strong> Zvimba District</p>
+                        <p>Our home province where we began our journey. We operate comprehensive healthcare programs including our headquarters in Nyabira.</p>
+                    </div>
+                </div>
+                
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url(MISSION\ CHARITABLE\ TRUST\ OUTREACH.jpg);"></div>
+                    <div class="province-content">
+                        <h3>Mashonaland Central</h3>
+                        <p><strong>District:</strong> Mazowe District</p>
+                        <p>In Mazowe District, we focus on maternal and child health programs, providing essential care to families in remote areas.</p>
+                    </div>
+                </div>
+                
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url(Mission\ Charitable\ Trust\ Logo.jpg);"></div>
+                    <div class="province-content">
+                        <h3>Masvingo</h3>
+                        <p><strong>District:</strong> ZAKA District</p>
+                        <p>Our operations in Zaka District include mobile clinics, health screenings, and our nursing assistant training program.</p>
+                    </div>
+                </div>
+                
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url('Gokwe.jpg');"></div>
+                    <div class="province-content">
+                        <h3>Midlands</h3>
+                        <p><strong>District:</strong> Gokwe North District</p>
+                        <p>In Gokwe North, we focus on combating infectious diseases and providing health education to remote communities.</p>
+                    </div>
+                </div>
+                
+                <div class="province-card">
+                    <div class="province-img" style="background-image: url(rusape.jpg);"></div>
+                    <div class="province-content">
+                        <h3>Manicaland</h3>
+                        <p><strong>District:</strong> Makoni</p>
+                        <p>Our programs in Makoni District include comprehensive healthcare services and community health worker training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expansion Section -->
+    <section class="section expansion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Expansion Plans</h2>
+                <p>Growing our impact to reach more communities in need</p>
+            </div>
+            
+            <div class="expansion-content">
+                <p>As part of our commitment to serving underserved communities across Zimbabwe, Mission Charitable Trust is planning to expand its operations to Matabeleland North Province, specifically targeting Binga District.</p>
+                
+                <div class="expansion-card">
+                    <h3><i class="fas fa-arrows-alt-h"></i> Forthcoming Expansion</h3>
+                    <p>Our needs assessment has identified significant healthcare challenges in Binga District, where communities face limited access to medical facilities and trained healthcare professionals.</p>
+                    
+                    <p>We plan to implement our proven model of mobile clinics and community health worker training to address these challenges, with a focus on:</p>
+                    
+                    <ul class="overview-highlights">
+                        <li><i class="fas fa-clinic-medical"></i> Mobile health clinics serving remote villages</li>
+                        <li><i class="fas fa-user-graduate"></i> Training local community health workers</li>
+                        <li><i class="fas fa-hand-holding-medical"></i> Maternal and child health programs</li>
+                        <li><i class="fas fa-tint"></i> Clean water and sanitation initiatives</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px;">This expansion represents our commitment to ensuring all Zimbabweans have access to quality healthcare, regardless of their location or socioeconomic status.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Mission Charitable Trust</h3>
+                    <p>Headquartered in Nyabira, Zvimba District, Mashonaland West Province. Serving communities across Zimbabwe since 2019.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Operational Provinces</h3>
+                    <ul>
+                        <li>Mashonaland East (Wedza)</li>
+                        <li>Mashonaland West (Zvimba)</li>
+                        <li>Mashonaland Central (Mazowe)</li>
+                        <li>Masvingo (ZAKA)</li>
+                        <li>Midlands (Gokwe North)</li>
+                        <li>Manicaland (Makoni)</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Nyabira, Zvimba District, Zimbabwe</li>
+                        <li><i class="fas fa-phone"></i> +263 77 497 1982</li>
+                        <li><i class="fas fa-envelope"></i> missioncharitabletrust@gmail.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="index.html#programs">Our Programs</a></li>
+                        <li><a href="training.html">Training Program</a></li>
+                        <li><a href="index.html#donate">Support Our Work</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Mission Charitable Trust. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Initialize map
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create map centered on Zimbabwe
+            const map = L.map('zimbabwe-map').setView([-19.0154, 29.1549], 6);
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Define province coordinates (approximate centers)
+            const provinceCoords = {
+                "Mashonaland East": [-18.50, 31.50],
+                "Mashonaland West": [-17.50, 30.00],
+                "Mashonaland Central": [-17.00, 31.00],
+                "Masvingo": [-20.50, 31.00],
+                "Midlands": [-19.00, 29.50],
+                "Manicaland": [-18.50, 32.50],
+                "Matabeleland North": [-18.50, 27.50]
+            };
+            
+            // Add markers for current operations
+            const currentProvinces = [
+                "Mashonaland East", "Mashonaland West", "Mashonaland Central", 
+                "Masvingo", "Midlands", "Manicaland"
+            ];
+            
+            currentProvinces.forEach(province => {
+                L.circleMarker(provinceCoords[province], {
+                    color: '#1A73B8',
+                    fillColor: '#1A73B8',
+                    fillOpacity: 0.7,
+                    radius: 10
+                }).addTo(map).bindPopup(`<b>${province}</b><br>Current Operations`);
+            });
+            
+            // Add marker for expansion plans
+            L.circleMarker(provinceCoords["Matabeleland North"], {
+                color: '#E41B23',
+                fillColor: '#E41B23',
+                fillOpacity: 0.7,
+                radius: 10
+            }).addTo(map).bindPopup('<b>Matabeleland North</b><br>Expansion Plans (Binga District)');
+        });
+    </script>
+</body>
+</html>
